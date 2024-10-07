@@ -4,18 +4,37 @@ import { Form } from "react-final-form"
 
 
 test("renders autocomplete", () => {
-    const options = [
-        {value: "1", label: "one"},
-        {value: "2", label: "two"},
-    ]
+    const initialOptions = [
+        { value: 'Hello', label: 'Hello' },
+        { value: 'World', label: 'World' },
+        { value: 'Out', label: 'Out' },
+        { value: 'There', label: 'There' },
+    ];
+
+    const initialValues = {
+        test: initialOptions[0].value,
+    };
+
+    const initialGetOptionValue = (option: any) => option.value;
+    const initialGetOptionLabel = (option: any) => option.label;
 
     const rendered = render(
         <Form
             onSubmit={() => {
             }}
+            initialValues={initialValues}
+
             render={({handleSubmit}) => (
                 <form onSubmit={handleSubmit}>
-                    <Autocomplete name="test" label="test" options={options}/>
+                    <Autocomplete
+                        name="test"
+                        label="test"
+                        options={initialOptions}
+                        getOptionValue={initialGetOptionValue}
+                        getOptionLabel={initialGetOptionLabel}
+                        textFieldProps={{ margin: 'normal' }}
+                        required={true}
+                    />
                 </form>
             )}
         />,
